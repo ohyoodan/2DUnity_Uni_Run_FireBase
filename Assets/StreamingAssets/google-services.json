@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "213574543378",
+    "firebase_url": "https://uni-run-firebase-default-rtdb.firebaseio.com",
+    "project_id": "uni-run-firebase",
+    "storage_bucket": "uni-run-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213574543378:android:66bb566cd344caf26f90cb",
+        "android_client_info": {
+          "package_name": "com.ohyoodan.UniRun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUmrIXsf0oioBoIR1KMZ-OGEMiG40sy8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213574543378:android:004ad6ea1fea3ac86f90cb",
+        "android_client_info": {
+          "package_name": "com.ohyoodan.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUmrIXsf0oioBoIR1KMZ-OGEMiG40sy8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
