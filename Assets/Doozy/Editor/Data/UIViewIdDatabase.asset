@@ -17,6 +17,8 @@ MonoBehaviour:
     - Category: Lobby
       Name: Main
     - Category: Lobby
+      Name: NickName
+    - Category: Lobby
       Name: Rank
     - Category: None
       Name: None

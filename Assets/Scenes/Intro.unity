@@ -2993,6 +2993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailField: {fileID: 1231128237}
   passField: {fileID: 418061068}
+  fireBaseAuth_Manager: {fileID: 326925124}
 --- !u!4 &1172903381
 Transform:
   m_ObjectHideFlags: 0
@@ -5562,6 +5563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbbcc29d62bf4860a93d3b4d09bec55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScore: 0
+  end: 0
 --- !u!4 &1909710402
 Transform:
   m_ObjectHideFlags: 0

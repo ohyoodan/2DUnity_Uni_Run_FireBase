@@ -2,19 +2,15 @@ using UnityEngine;
 using Firebase.Database;
 using System.Collections.Generic;
 using Firebase.Extensions;
-using UnityEditor.U2D.Aseprite;
-using Unity.VisualScripting;
-using System.Linq;
+using System;
 
 public class LeadersManager : MonoBehaviour
 {   public bool end=false;
     public DataSnapshot dataSnapshot;
     public List<UserData> RankList;
-    public List<object> list;
     DatabaseReference reference=FirebaseDatabase.DefaultInstance.RootReference;
     void Awake() {
         RankList = new List<UserData>();        
-        //list = new List<object>();
         RankUpload();
     }
 
@@ -22,7 +18,7 @@ public class LeadersManager : MonoBehaviour
     {
         if(end){
             end=false;
-           RankSort();
+            //RankSort();
         }
     }
     void RankUpload(){
@@ -32,24 +28,21 @@ public class LeadersManager : MonoBehaviour
             }else if(task.IsCompleted){
             dataSnapshot = task.Result;
             end= true;
-            list =dataSnapshot.Children.ToList<object>();
-            Debug.Log(dataSnapshot.Children.ToString());
             }
         });
     }
 
-
     void RankSort(){
-         foreach(var data in dataSnapshot.Children){
-            UserData userData = new UserData();
-            userData.NickName = data.Child("Nickname").Value.ToString();
-            userData.highScore=int.Parse(data.Child("highScore").Value.ToString());
+            Debug.Log(dataSnapshot.Value.ToString());
+            foreach(var data in dataSnapshot.Children){
+            UserData userData = new UserData(data.Child("Nickname").Value.ToString());
+            userData.HighScore=int.Parse(data.Child("HighScore").Value.ToString());
             RankList.Add(userData);
             }
-        RankList.Sort();
-        foreach(UserData userData in RankList){
-            Debug.Log(userData.highScore);
-        }
+            RankList.Sort();
+            foreach(UserData userData in RankList){
+            Debug.Log(userData.HighScore);
+            }
         
     }
 }

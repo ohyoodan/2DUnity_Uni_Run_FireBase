@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         GameStartEvent += GameStartboolStart;
+        
     }
 
     void Start()
@@ -93,7 +94,6 @@ public class GameManager : MonoBehaviour
         if(Database.instance.highScore<score){
             Database.instance.CurrentUser_ScoreAdd(score);
         }
-        
         // 게임 오버 UI를 활성화
         gameoverUI.SetActive(true);//뷰
     }

@@ -27,6 +27,7 @@ namespace Doozy.Runtime.UIManager
         public enum Lobby
         {
             Main,
+            NickName,
             Rank
         }    
     }

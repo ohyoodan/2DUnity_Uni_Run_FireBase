@@ -4,20 +4,9 @@ using Firebase.Auth;
 public class FireBaseAuth_Manager : MonoBehaviour
 {
     private FirebaseAuth auth;
-    public static FireBaseAuth_Manager instance=null;
     public bool Loginsuccess =false;
      private void Awake() {
-        if(null==instance)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
         auth=FirebaseAuth.DefaultInstance;
-        
     }
     
     public void Login(string email, string password)
@@ -35,7 +24,7 @@ public class FireBaseAuth_Manager : MonoBehaviour
                 }
         }
         );
-        
+        Database.instance.User_Auth_Current();
     }
     public void Create(string email, string password)
     {
@@ -56,12 +45,9 @@ public class FireBaseAuth_Manager : MonoBehaviour
                 string[] str;
                 str=email.Split("@");
                 
-                Database.instance.Email_Create(auth.CurrentUser.UserId,str[0]);
+                Database.instance.DatabaseUser_Create(auth.CurrentUser.UserId,str[0]);
             }
         );
-    }
-    public void LogOut(){
-        auth.SignOut();
     }
 
 }

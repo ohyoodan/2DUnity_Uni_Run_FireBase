@@ -6,8 +6,9 @@ public class Intro_Manager : MonoBehaviour
 {
     [SerializeField]TMP_InputField emailField;
     [SerializeField]TMP_InputField passField;
+    [SerializeField]FireBaseAuth_Manager fireBaseAuth_Manager;
     void Update(){
-        if(FireBaseAuth_Manager.instance.Loginsuccess){
+        if(fireBaseAuth_Manager.Loginsuccess){
             Scene();
         }
     }
@@ -15,9 +16,9 @@ public class Intro_Manager : MonoBehaviour
         SceneManager.LoadScene(1); 
     }
     public void Create_account(){
-        FireBaseAuth_Manager.instance.Create(emailField.text,passField.text);
+        fireBaseAuth_Manager.Create(emailField.text,passField.text);
     }
     public void Login(){
-        FireBaseAuth_Manager.instance.Login(emailField.text,passField.text);
+        fireBaseAuth_Manager.Login(emailField.text,passField.text);
     }
 }

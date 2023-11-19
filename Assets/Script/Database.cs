@@ -1,9 +1,7 @@
-using System.Collections;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine;
-using System;
 public class Database : MonoBehaviour 
 {  
   DatabaseReference reference;
@@ -14,6 +12,7 @@ public class Database : MonoBehaviour
   public bool end=false;
   private FirebaseAuth auth;
    private void Awake(){
+
         if(null==instance)
         {
             instance = this;
@@ -27,11 +26,18 @@ public class Database : MonoBehaviour
       auth=FirebaseAuth.DefaultInstance;
     }
 
-   public void Email_Create(string UID,string NickName){
-      userData = new UserData();
-      userData.NickName=NickName;
-      UserProfile userProfile= new UserProfile{
-      DisplayName=NickName, 
+   public void DatabaseUser_Create(string UID,string nickName){
+      userData = new UserData(nickName);
+      string json = JsonUtility.ToJson(userData);
+      reference.Child("users").Child(UID).SetRawJsonValueAsync(json);
+  }
+
+public string userNickNameOut(){
+        return auth.CurrentUser.DisplayName;
+    }
+  public void UserFile_Create(string nickName){
+  UserProfile userProfile= new UserProfile{
+      DisplayName=nickName, 
       };
       user.UpdateUserProfileAsync(userProfile).ContinueWithOnMainThread(task=>
       {
@@ -42,14 +48,13 @@ public class Database : MonoBehaviour
           return;
         }
       });
-      string json = JsonUtility.ToJson(userData);
-      reference.Child("users").Child(UID).SetRawJsonValueAsync(json);
   }
-
   public void CurrentUser_ScoreAdd(int score){
-    reference.Child("users").Child(user.UserId).Child("highScore").SetValueAsync(score);
+    reference.Child("users").Child(user.UserId).Child("HighScore").SetValueAsync(score);
   }
-  
+  public void User_Auth_Current(){
+    user=auth.CurrentUser;
+  }
   public void Get(){
     reference.Child("users").GetValueAsync().ContinueWithOnMainThread(task=>
     {
@@ -59,19 +64,24 @@ public class Database : MonoBehaviour
       else if(task.IsCompleted)
       {
       DataSnapshot snapshot =task.Result;      
-      highScore=int.Parse(snapshot.Child(user.UserId).Child("highScore").Value.ToString());
+      highScore=int.Parse(snapshot.Child(user.UserId).Child("HighScore").Value.ToString());
       end=true;      
       }
     });
     
   }
+
+  public void LogOut(){
+        auth.SignOut();
+  }
 }
   
 [System.Serializable]
 public class UserData{
-public UserData(){}
+public UserData(string nickName){NickName=nickName;}
+public UserData(string nickName,int highScore){NickName=nickName;HighScore=highScore;}
 public string NickName;
-public int highScore=0;
+public int HighScore=0;
 public int Rank=0;
 
 }

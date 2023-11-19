@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e5d87aedf6426e9f917c154154295e, type: 3}
   m_Name: UIMenuSettings
   m_EditorClassIdentifier: 
-  SelectNewlyCreatedObjects: 0
+  SelectNewlyCreatedObjects: 1
   InstantiateMode: 0
-  ItemSize: 68
+  ItemSize: 64
