@@ -42,10 +42,6 @@ public class FireBaseAuth_Manager : MonoBehaviour
                     Debug.Log("회원가입 실패 \n");
                     return;
                 }
-                string[] str;
-                str=email.Split("@");
-                
-                Database.instance.DatabaseUser_Create(auth.CurrentUser.UserId,str[0]);
             }
         );
     }

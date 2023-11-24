@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         while(!Database.instance.end){
             yield return null;
         }
+        Database.instance.end=false;
         //게임 오버 이벤트 실행
         if(Database.instance.highScore<score){
             Database.instance.CurrentUser_ScoreAdd(score);

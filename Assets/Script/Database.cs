@@ -2,6 +2,8 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine;
+using System.Collections.Generic;
+
 public class Database : MonoBehaviour 
 {  
   DatabaseReference reference;
@@ -26,10 +28,10 @@ public class Database : MonoBehaviour
       auth=FirebaseAuth.DefaultInstance;
     }
 
-   public void DatabaseUser_Create(string UID,string nickName){
+   public void DatabaseUser_Create(string nickName){
       userData = new UserData(nickName);
       string json = JsonUtility.ToJson(userData);
-      reference.Child("users").Child(UID).SetRawJsonValueAsync(json);
+      reference.Child("users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
   }
 
 public string userNickNameOut(){
@@ -47,6 +49,7 @@ public string userNickNameOut(){
         if(task.IsFaulted){
           return;
         }
+        end=true;
       });
   }
   public void CurrentUser_ScoreAdd(int score){
@@ -86,14 +89,13 @@ public int Rank=0;
 
 }
 
-// public class SortUserData : IComparer<UserData>
-// {
-//   public int Comparer(UserData x, UserData y){
-//   if(x.highScore==y.highScore){
-//     return 0;
-//   }
-//   return x.highScore.CompareTo(y.Rank)*-1;
-//   }
-//}
+public class SortUserData : IComparer<UserData>
+{
+    public int Compare(UserData x, UserData y)
+    {
+      return y.HighScore.CompareTo(x.HighScore);
+    }
+
+}
 
 

@@ -17,6 +17,8 @@ MonoBehaviour:
     - Category: Lobby
       Name: Exit
     - Category: Lobby
+      Name: Main
+    - Category: Lobby
       Name: Rank
     - Category: Lobby
       Name: Start
