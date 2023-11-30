@@ -12,7 +12,7 @@ public class LeadersManager : MonoBehaviour
     DatabaseReference reference;
     [SerializeField]GridLayoutGroup RankBoard;
     [SerializeField]UIStepper uIStepper;
-    //[SerializeField] 
+    [SerializeField]UIScrollbar uIScrollbar; 
     void Awake() {
         RankList = new List<UserData>();        
         reference=FirebaseDatabase.DefaultInstance.RootReference;
@@ -73,7 +73,28 @@ public class LeadersManager : MonoBehaviour
             RankListNum++;
          }
     }
+
+    void RankBoard_Contents_Value(float RankBoardNumber){
+         int childCount = RankBoard.transform.childCount;
+         int RankListNum;
+         RankListNum=(int)(RankBoardNumber-1)*childCount;
+         Debug.Log(RankListNum);
+            for(int i =0; i< childCount; i++){
+            RankBoard_Content currentRankBoardContent=RankBoard.transform.GetChild(i).GetComponent<RankBoard_Content>();
+            if(RankList.Count>RankListNum){
+            currentRankBoardContent.RankNumSet(RankList[RankListNum].Rank.ToString());
+            currentRankBoardContent.NickNameSet(RankList[RankListNum].NickName);
+            currentRankBoardContent.HighScoreSet(RankList[RankListNum].HighScore.ToString());
+            }else{            
+            currentRankBoardContent.RankNumSet("-");    
+            currentRankBoardContent.NickNameSet("-");
+            currentRankBoardContent.HighScoreSet("-");
+            }
+            RankListNum++;
+         }
+    }
    public void RankBoard_Contents_Button()=>RankBoard_Contents(uIStepper.value);
     
+    public void RankBoard_Contents_Value()=>RankBoard_Contents_Value(uIScrollbar.value);
 }
     
